@@ -52,7 +52,7 @@ func (c *Client) Delete(path string) error {
 		return utils.NewError(c.Delete, "unable to create request", c, err)
 	} else if resp, err := c.Do(req); err != nil {
 		return utils.NewError(c.Delete, "unable to execute request", c, err)
-	} else if resp.StatusCode != nhttp.StatusNoContent && resp.StatusCode != nhttp.StatusNotFound {
+	} else if resp.StatusCode != nhttp.StatusNoContent && resp.StatusCode != nhttp.StatusNotFound && resp.StatusCode!=nhttp.StatusOK {
 		err := new(entities.Error)
 		resp.Decode(err)
 		msg := fmt.Sprintf("unexpected server response %s", resp.Status)
